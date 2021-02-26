@@ -51,12 +51,13 @@ def create_tx(coin, account, to, amount):
 def send_tx (coin, account, to, amount):
     tx = create_tx(coin, account, to, amount)
     signed_tx = account.sign_transaction(tx)
+    print(f"send_tx {coin, account, to, amount}")
     if coin== ETH:
         return w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 
     elif coin== BTCTEST:
         return NetworkAPI.broadcast_tx_testnet(signed_tx) 
-
+    
 account = priv_key_to_account(BTCTEST, btc_priv_key)
 
     
